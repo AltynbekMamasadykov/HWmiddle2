@@ -4,6 +4,7 @@ import exceptions.TruckStateException;
 import java.util.Random;
 import static enums.CarState.*;
 
+
 public class Service implements interfaces.Service {
     @Override
     public void changeDriver(Driver driver,Truck truck) {

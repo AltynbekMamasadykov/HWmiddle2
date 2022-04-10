@@ -63,8 +63,7 @@ public class Main {
             System.out.println("""
                     To change driver press 1
                     To send truck to road press 2
-                    To send truck to repair press 3
-                    To see drivers information press 4
+                    To send truck to repair press 3                    
                     If you want to quit press 0""");
             int input = scanner.nextInt();
             if (input == 1) {
