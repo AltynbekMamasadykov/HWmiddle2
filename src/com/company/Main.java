@@ -1,9 +1,10 @@
 package com.company;
-
-
 import classes.Driver;
+import classes.Service;
 import classes.Truck;
 import com.google.gson.*;
+import exceptions.ChangeDriverException;
+import exceptions.TruckStateException;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,6 +14,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import static enums.CarState.*;
 import static enums.CarType.*;
@@ -48,7 +50,68 @@ public class Main {
 
         String jsonDriver = GSON.toJson(drivers);
         setWritePathDriver(jsonDriver);
+//        System.out.println(readFile());
         printDriverTable(drivers);
+
+        System.out.println();
+        System.out.println("********************************************************************************");
+
+        Service service = new Service();
+        Scanner scanner = new Scanner(System.in);
+
+        for (;true;) {
+            System.out.println("""
+                    To change driver press 1
+                    To send truck to road press 2
+                    To send truck to repair press 3
+                    To see drivers information press 4
+                    If you want to quit press 0""");
+            int input = scanner.nextInt();
+            if (input == 1) {
+                try{
+                    System.out.println("Select drivers id");
+                    int inputId = scanner.nextInt();
+                    service.changeDriver(drivers.get(inputId - 1), trucks.get(inputId - 1));
+                    printTable(trucks);
+                    printDriverTable(drivers);
+                }
+                catch (ChangeDriverException e) {
+                    System.err.println(e.getMessage());
+                }
+
+            }
+            if (input == 2) {
+                try {
+                    System.out.println("Select truck's ID");
+                    int inputId = scanner.nextInt();
+                    service.startDriving(drivers.get(inputId - 1), trucks.get(inputId - 1));
+                    System.out.println(trucks.get(inputId - 1));
+                    printTable(trucks);
+                    printDriverTable(drivers);
+                }
+                catch (TruckStateException e) {
+                    System.err.println(e.getMessage());
+                }
+            }
+            if (input == 3) {
+                try{
+                    System.out.println("Select truck's ID");
+                    int inputId = scanner.nextInt();
+                    service.startRepair(drivers.get(inputId - 1), trucks.get(inputId - 1));
+                    System.out.println(trucks.get(inputId - 1));
+                    printTable(trucks);
+                    printDriverTable(drivers);
+                }
+                catch (TruckStateException e) {
+                    System.err.println(e.getMessage());
+                }
+            }
+            if (input == 0) {
+                System.out.println("See You!");
+                break;
+            }
+        }
+
 
     }
 
