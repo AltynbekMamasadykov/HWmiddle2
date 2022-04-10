@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "model": "Renault Magnum",
+    "driver_name": "",
+    "carState": "BASE",
+    "carType": "TRUCK"
+  },
+  {
+    "id": 2,
+    "model": "Volvo FH12",
+    "driver_name": "",
+    "carState": "BASE",
+    "carType": "TRUCK"
+  },
+  {
+    "id": 3,
+    "model": "DAF XF",
+    "driver_name": "",
+    "carState": "BASE",
+    "carType": "TRUCK"
+  }
+]
